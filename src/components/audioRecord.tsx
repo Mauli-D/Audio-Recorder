@@ -2,13 +2,28 @@ import { useEffect, useState } from "react"
 import './assets/styles/main.scss'
 import { startRecording } from "../utils/startRecording"
 import { stopRecording } from "../utils/stopRecording"
+import { formatTime } from "../utils/formatTimer"
 const MicRecorder = require('mic-recorder-to-mp3')
-const Mp3Recorder = new MicRecorder({ bitRate: 128 })
+const Mp3Recorder = new MicRecorder()
 
 const AudioRecord = () => {
     const [blob, setBlob] = useState('');
-    const [isReecording, setIsRecording] = useState(false);
+    const [isRecording, setIsRecording] = useState(false);
     const [isBlocked, setIsBlocked] = useState(false);
+    const [timer, setTimer] = useState(0)
+
+    console.log({ timer, blob, isBlocked, isRecording })
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (isRecording) {
+                setTimer(seconds => seconds + 1);
+            }
+        }, 1000);
+        return () => { 
+            clearInterval(interval); 
+            setTimer(0) 
+        };
+    }, [isRecording])
 
     useEffect(() => {
         let newVariable: any;
@@ -24,15 +39,21 @@ const AudioRecord = () => {
                 setIsBlocked(true)
             },
         );
-    })
+    }, [])
 
     return <div className="container">
         <div className="main-component">
-            <button className="startButton" onClick={(e) => startRecording({ Mp3Recorder, isBlocked, setBlob, setIsRecording })} disabled={isReecording}>Record</button>
+            <button className="startButton" onClick={(e) => startRecording({ Mp3Recorder, isBlocked, setBlob, setIsRecording })} disabled={isRecording}>Record</button>
             <button className="stopButton" onClick={(e) => stopRecording({ Mp3Recorder, setBlob, setIsRecording })}>Stop</button>
+            {isRecording &&
+                <p className="timer">{formatTime({ timer })}</p>
+            }
             <div>
-                {blob && <audio className="blob" src={blob} controls />}
+                {blob &&
+                    <audio className="blob" src={blob} controls />
+                }
             </div>
+
         </div>
     </div>
 }

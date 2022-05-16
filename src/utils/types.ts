@@ -10,3 +10,7 @@ export interface stopRecordingTypes {
     setBlob: any
     setIsRecording: any
 }
+
+export interface formatTimeTypes {
+    timer: number
+}

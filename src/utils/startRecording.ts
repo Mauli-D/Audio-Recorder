@@ -10,6 +10,6 @@ export const startRecording = ({ Mp3Recorder, isBlocked, setBlob, setIsRecording
                 setBlob('');
                 setIsRecording(true);
             }).catch((e: any) => console.error(e)
-            )
+        )
     }
 }

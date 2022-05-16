@@ -1,5 +1,5 @@
 body {
-    background: url(../images/music.jpeg) no-repeat center;
+    background: url(../images/recorder.jpeg) no-repeat center;
     background-size: cover;
     background-attachment: fixed;
     .main-component {
@@ -10,12 +10,12 @@ body {
         .startButton {
             background-color: #4CAF50;
             border: none;
-            color: #fff;
-            padding: 15px 30px;
+            color: #f8f8ff;
+            padding: 15px 35px;
             text-align: center;
-            text-decoration: none;
             display: inline-block;
-            font-size: 16px;
+            font-size: 24px;
+            font-weight: bold;
         }
         .startButton:disabled {
             background-color: #717a72;
@@ -23,12 +23,16 @@ body {
         .stopButton {
             background-color: #f82e49;
             border: none;
-            color: #fff;
-            padding: 15px 30px;
+            color: #f8f8ff;
+            padding: 15px 35px;
             text-align: center;
-            text-decoration: none;
             display: inline-block;
-            font-size: 16px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .timer {
+            font-size: 35px;
+            color: #f8f8ff;
         }
         .blob {
             margin-top: 50px;
