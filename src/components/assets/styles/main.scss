@@ -1,0 +1,37 @@
+body {
+    background: url(../images/music.jpeg) no-repeat center;
+    background-size: cover;
+    background-attachment: fixed;
+    .main-component {
+        width: 50%;
+        text-align: center;
+        margin: auto;
+        padding: 20px;
+        .startButton {
+            background-color: #4CAF50;
+            border: none;
+            color: #fff;
+            padding: 15px 30px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+        .startButton:disabled {
+            background-color: #717a72;
+        }
+        .stopButton {
+            background-color: #f82e49;
+            border: none;
+            color: #fff;
+            padding: 15px 30px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+        .blob {
+            margin-top: 50px;
+        }
+    }
+}
