@@ -4,7 +4,7 @@ export const stopRecording = ({ Mp3Recorder, setBlob, setIsRecording }: stopReco
     Mp3Recorder
         .stop()
         .getMp3()
-        .then((blob: any) => {
+        .then(([blob]: any) => {
             const blobURL = URL.createObjectURL(new Blob(blob))
             setBlob(blobURL)
             setIsRecording(false);

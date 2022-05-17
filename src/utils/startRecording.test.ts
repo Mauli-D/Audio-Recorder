@@ -1,30 +1,52 @@
 import { startRecording } from './startRecording'
 
 test(`start recording on click`, () => {
-    const spy = jest.fn();
+    const setBlobSpy = jest.fn();
+    const setIsRecordingSpy = jest.fn();
     const mock = {
-        Mp3Recorder: spy,
+        Mp3Recorder: {
+            start: () => {
+                return {
+                    then: (func: () => void) => {
+                        func();
+                        return { catch: () => null }
+                    }
+                }
+            }
+        },
         isBlocked: false,
-        setBlob: spy,
-        setIsRecording: spy,
-        setTimer: spy,
-        timer: 0
+        setBlob: setBlobSpy,
+        setIsRecording: setIsRecordingSpy,
     }
 
     startRecording(mock);
-    expect(spy).toBe({setBlob: '', setIsRecording: true, setTimer: 1});
+    expect(setIsRecordingSpy).toHaveBeenCalledWith(true);
+    expect(setBlobSpy).toHaveBeenCalledWith('');
+
 })
 
-test(`recording is blocked`, () => {
-    const spy = jest.fn();
+test(`blocked`, () => {
+    const setBlobSpy = jest.fn();
+    const setIsRecordingSpy = jest.fn();
+    const alertSpy = jest.fn();
+    global.alert = alertSpy;
+
     const mock = {
-        Mp3Recorder: spy,
+        Mp3Recorder: {
+            start: () => {
+                return {
+                    then: (func: () => void) => {
+                        func();
+                        return { catch: () => null }
+                    }
+                }
+            }
+        },
         isBlocked: true,
-        setBlob: spy,
-        setIsRecording: spy,
-        setTimer: spy,
-        timer: 0
+        setBlob: setBlobSpy,
+        setIsRecording: setIsRecordingSpy,
     }
 
-    expect(alert('Permission Denied'))
+    startRecording(mock);
+    expect(alertSpy).toHaveBeenCalled()
 })
